@@ -1,10 +1,10 @@
 # forecast – May 2015
 
-TODO: Implement unit tests & Google Maps API.
+TODO: Implement unit tests & Google Maps API. Add Node Express HTTP server.
 
 ## Build & development
 
-Run `npm install` for dependencies.
+Run `npm install` & `bower install` for dependencies.
 
 Run `grunt` for building and `grunt serve` for a preview.
 
