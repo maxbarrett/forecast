@@ -1,0 +1,32 @@
+<div class="row marketing">
+
+<h2>{{timezone}}</h2>
+<p><b>Today's forecast:</b> {{dailySummary}}</p>
+<p>{{date}}</p>
+
+<table width="100%" id="hourly">
+    <colgroup>
+        <col span="1" style="background-color:#e8e8e8">
+    </colgroup>
+
+	<tr>
+		<td></td>
+		<td ng-repeat="item in time | limitTo: 10">{{item}}:00</td>
+	</tr>
+	<tr>
+		<td>Summary:</td>
+		<td ng-repeat="item in hourly | limitTo: 10">{{item.summary}}</td>
+	</tr>
+	<tr>
+		<td>Temp:</td>
+		<td ng-repeat="item in hourly | limitTo: 10">{{item.temperature}}</td>
+	</tr>
+	<tr>
+		<td>Chance of rain:</td>
+		<td ng-repeat="item in hourly | limitTo: 10">{{item.precipProbability * 100}}%</td>
+	</tr>
+	<tr>
+		<td>Wind speed:</td>
+		<td ng-repeat="item in hourly | limitTo: 10">{{item.windSpeed}}</td>
+	</tr>
+</table>
