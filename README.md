@@ -1,6 +1,6 @@
-# forecast – May 2015
+# Forecast App
 
-TODO: Implement unit tests & Google Maps API. Add Node Express HTTP server.
+TODO: Implement unit tests & Google Maps API. Add Node Express HTTP server & remove JSONP.
 
 ## Build & development
 
