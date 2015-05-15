@@ -9,7 +9,10 @@
  */
 angular.module('forecastApp')
 	.controller('WeekdayCtrl', function($scope, $routeParams, weatherFactory, dateFactory) {
-	    $scope.weather = [];
+
+	    $scope.timezone = '';
+	    $scope.weekdayData = {};
+	    $scope.date = '';
 
 	    var init = function() {
 

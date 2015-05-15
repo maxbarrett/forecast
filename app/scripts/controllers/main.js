@@ -9,5 +9,5 @@
  */
 angular.module('forecastApp')
     .controller('MainCtrl', function($scope) {
-    	$scope.test = 'testing';
+    	$scope.test = 'Testing';
     });
