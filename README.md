@@ -1,15 +1,17 @@
 # Forecast App
 
-TODO: Implement unit tests & Google Maps API. Add Node Express HTTP server & remove JSONP.
+TODO: Implement unit tests, Google Maps API & remove JSONP.
 
-## Build & development
+## To build:
 
 Run `npm install` & `bower install` for dependencies.
 
-Run `grunt` for building and `grunt serve` for a preview.
+## To serve:
 
-## Testing
+Run `npm start` & point browser to `http://localhost:8000/`
+
+## To test:
 
 **There are no tests yet**
 
-Running `grunt test` will run the unit tests with karma
+Run `grunt test` to run the Jasmine unit tests with karma
