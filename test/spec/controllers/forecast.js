@@ -1,24 +1,49 @@
-'use strict';
+describe('ForecastCtrl', function() {
+    var scope, ctrl, httpBackend;
 
-describe('Controller: ForecastCtrl', function() {
-
-    // load the controller's module
     beforeEach(module('forecastApp'));
 
-    var ForecastCtrl,
-        scope,
-        daysMock = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    beforeEach(inject(function($controller, $rootScope, WeatherAPI, $httpBackend) {
 
-    // Initialize the controller and a mock scope
-    beforeEach(inject(function($controller, $rootScope) {
-        scope = $rootScope.$new();
-        ForecastCtrl = $controller('ForecastCtrl', {
-            $scope: scope,
-            days: daysMock
-        });
-    }));
+            httpBackend = $httpBackend;
+            var WeatherAPICall = httpBackend.whenJSONP();
 
-    it('should attach an array of days to the scope', function() {
-        expect(scope.days.length).toBe(7);
+            scope = $rootScope.$new();
+            ctrl = $controller('ForecastCtrl', {
+                $scope: scope,
+                $routeParams: {location: '-33.8696,151.2070'},
+                WeatherAPI: WeatherAPI
+            });
+
+            //var days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+			var mock = {
+			    currently: {},
+			    daily: {
+			    	data:[{}, {}, {}, {}, {}, {}, {}, {}]
+			    },
+			    flags: {},
+			    hourly: {},
+			    latitude: -33.8696,
+			    longitude: 151.207,
+			    offset: 10,
+			    timezone: "Australia/Sydney"
+			}
+
+            WeatherAPICall.respond(mock);
+        })
+    );
+
+    it('should set days on successful search', function() {
+    	expect(scope.days).toBeUndefined();
+
+        scope.weather();
+        httpBackend.flush();
+
+        expect(angular.isArray(scope.days)).toBeTruthy();
+        expect(scope.days.length > 7).toBeTruthy(); 
+        expect(scope.timezone).toEqual('Australia/Sydney');
+
     });
+
 });
+

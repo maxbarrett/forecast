@@ -12,6 +12,7 @@ Run `npm start` & point browser to `http://localhost:8000/`
 
 ## To test:
 
-**There are no tests yet**
+Install karma globally:
+`npm install -g karma-cli`
 
-Run `grunt test` to run the Jasmine unit tests with karma
+Run `npm test` to run the Jasmine unit tests with karma
