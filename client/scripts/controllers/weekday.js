@@ -8,7 +8,7 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('WeekdayCtrl', function($scope, $routeParams, weatherFactory, dateFactory) {
+	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory) {
 
 	    $scope.timezone = '';
 	    $scope.weekdayData = {};
@@ -16,7 +16,7 @@ angular.module('forecastApp')
 
 	    var init = function() {
 
-	        weatherFactory.getWeather($routeParams.location).success(function(data) {
+	        WeatherAPI.get($routeParams.location).success(function(data) {
 
 	   			// Find the correct day data
 	   			var getDay = data.daily.data.filter(function (day) {

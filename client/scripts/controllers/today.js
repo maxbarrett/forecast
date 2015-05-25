@@ -8,7 +8,7 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('TodayCtrl', function($scope, $routeParams, weatherFactory, dateFactory) {
+	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory) {
 
 		$scope.timezone = '';
     	$scope.hourly = [];
@@ -17,7 +17,7 @@ angular.module('forecastApp')
     	$scope.date = '';
 
 	    var init = function() {
-	        weatherFactory.getWeather($routeParams.location).success(function(data) {
+	        WeatherAPI.get($routeParams.location).success(function(data) {
 
 	        	var timeArr = [];
 	        	data.hourly.data.forEach(function(i){
