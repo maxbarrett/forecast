@@ -5,7 +5,6 @@
   "repository": {},
   "dependencies": {
     "express": "~4.0.0",
-    "body-parser": "~1.5.0",
     "serve-favicon": "~2.0.1",
     "errorhandler": "~1.0.0",
     "ejs": "~0.8.4"
@@ -21,13 +20,10 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "grunt test"
+    "test": "karma start test/karma.conf.js"
   },
   "private": true,
   "description": "NewsCorp test",
-  "directories": {
-    "test": "test"
-  },
   "author": "Max Barrett <maxjbarrett@gmail.com>",
   "license": "ISC"
 }
