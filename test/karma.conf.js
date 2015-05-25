@@ -1,7 +1,5 @@
 // Karma configuration
 // http://karma-runner.github.io/0.12/config/configuration-file.html
-// Generated on 2015-05-12 using
-// generator-karma 0.9.0
 
 module.exports = function(config) {
   'use strict';
@@ -19,24 +17,23 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular/angular.js',
-      'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'client/bower_components/jquery/dist/jquery.js',
+      'client/bower_components/angular/angular.js',
+      'client/bower_components/bootstrap/dist/js/bootstrap.js',
+      'client/bower_components/angular-resource/angular-resource.js',
+      'client/bower_components/angular-route/angular-route.js',
+      'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      'app/scripts/**/*.js',
+      'client/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // web server port
-    port: 8080,
+    port: 8000,
 
     // Start these browsers, currently available:
     // - Chrome
