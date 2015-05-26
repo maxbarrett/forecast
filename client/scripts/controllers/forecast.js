@@ -10,17 +10,17 @@
 angular.module('forecastApp')
 	.controller('ForecastCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI) {
 
-		GeocodingAPI.get($routeParams.location).success(getLatLong);
-
-		function getLatLong(addressData){
-			var location = addressData.results[0].geometry.location;
-			$scope.weatherForecast = WeatherAPI.get(location.lat + ',' + location.lng).success(formatWeather);
-		}
+		GeocodingAPI.get($routeParams.location).then( function(addressData){
+			var location = addressData.data.results[0].geometry.location;
+			return WeatherAPI.get(location.lat + ',' + location.lng);
+		}).then(formatWeather).catch(function(err){
+			$scope.timezone = 'I\'m so sorry, there\'s been a terrible mistake';
+		});
 
 		function formatWeather(weatherData){
-        	$scope.timezone = weatherData.timezone;
-        	$scope.daily = cut(weatherData.daily.data, 5);
-        	$scope.days = cut(addDays(weatherData.daily.data), 5);
+        	$scope.timezone = weatherData.data.timezone;
+        	$scope.daily = cut(weatherData.data.daily.data, 5);
+        	$scope.days = cut(addDays(weatherData.data.daily.data), 5);
 		}
 
 		function addDays(data){
