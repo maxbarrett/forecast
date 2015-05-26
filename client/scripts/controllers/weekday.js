@@ -8,27 +8,20 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI) {
+	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI, Utils) {
 
 		GeocodingAPI.get($routeParams.location).then( function(addressData){
 			var location = addressData.data.results[0].geometry.location;
 			return WeatherAPI.get(location.lat + ',' + location.lng);
-		}).then(formatWeather).catch(function(err){
+		}).then(setScopeVars).catch(function(err){
 			$scope.timezone = 'I\'m so sorry, there\'s been a terrible mistake';
 		});
 
-		function formatWeather(weatherData){
+		function setScopeVars(weatherData){
    			// add vars to scope for use in view
         	$scope.timezone = weatherData.data.timezone;
-        	$scope.weekdayData = getFirstDay(weatherData.data.daily.data)[0]; // get first day
-        	$scope.date = dateFactory.formatDate(getFirstDay(weatherData.data.daily.data)[0].time);
-		}
-
-		function getFirstDay(data){
-			// Find the correct day data
-			return data.filter(function (day) {
-				return dateFactory.getDayName(dateFactory.getDay(dateFactory.getDate(day.time))).toLowerCase() === $routeParams.weekday.toLowerCase(); 
-			});
+        	$scope.weekdayData = Utils.getFirstDay(weatherData.data.daily.data)[0]; // get first day
+        	$scope.date = dateFactory.formatDate(Utils.getFirstDay(weatherData.data.daily.data)[0].time);
 		}
 
 	});
