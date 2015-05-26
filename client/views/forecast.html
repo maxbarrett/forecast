@@ -10,22 +10,22 @@
 
 	<tr>
 		<td></td>
-		<td ng-repeat="item in days | limitTo: 5">{{item}}</td>
+		<td ng-repeat="item in days">{{item}}</td>
 	</tr>
 	<tr>
 		<td>Summary:</td>
-		<td ng-repeat="item in daily | limitTo: 5">{{item.summary}}</td>
+		<td ng-repeat="item in daily">{{item.summary}}</td>
 	</tr>
 	<tr>
 		<td>Max temp:</td>
-		<td ng-repeat="item in daily | limitTo: 5">{{item.temperatureMax}}°F</td>
+		<td ng-repeat="item in daily">{{item.temperatureMax}}°F</td>
 	</tr>
 	<tr>
 		<td>Chance of rain:</td>
-		<td ng-repeat="item in daily | limitTo: 5">{{item.precipProbability * 100}}%</td>
+		<td ng-repeat="item in daily">{{item.precipProbability * 100}}%</td>
 	</tr>
 	<tr>
 		<td>Wind speed:</td>
-		<td ng-repeat="item in daily | limitTo: 5">{{item.windSpeed}}</td>
+		<td ng-repeat="item in daily">{{item.windSpeed}}</td>
 	</tr>
 </table>

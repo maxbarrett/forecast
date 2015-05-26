@@ -11,22 +11,22 @@
 
 	<tr>
 		<td></td>
-		<td ng-repeat="item in time | limitTo: 10">{{item}}:00</td>
+		<td ng-repeat="item in time | limitTo: 8">{{item}}:00</td>
 	</tr>
 	<tr>
 		<td>Summary:</td>
-		<td ng-repeat="item in hourly | limitTo: 10">{{item.summary}}</td>
+		<td ng-repeat="item in hourly">{{item.summary}}</td>
 	</tr>
 	<tr>
 		<td>Temp:</td>
-		<td ng-repeat="item in hourly | limitTo: 10">{{item.temperature}}</td>
+		<td ng-repeat="item in hourly">{{item.temperature}}</td>
 	</tr>
 	<tr>
 		<td>Chance of rain:</td>
-		<td ng-repeat="item in hourly | limitTo: 10">{{item.precipProbability * 100}}%</td>
+		<td ng-repeat="item in hourly">{{item.precipProbability * 100}}%</td>
 	</tr>
 	<tr>
 		<td>Wind speed:</td>
-		<td ng-repeat="item in hourly | limitTo: 10">{{item.windSpeed}}</td>
+		<td ng-repeat="item in hourly">{{item.windSpeed}}</td>
 	</tr>
 </table>

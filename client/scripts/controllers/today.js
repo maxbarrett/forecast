@@ -10,28 +10,28 @@
 angular.module('forecastApp')
 	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory) {
 
-		$scope.timezone = '';
-    	$scope.hourly = [];
-    	$scope.time = [];
-    	$scope.dailySummary = '';
-    	$scope.date = '';
+		$scope.weather = function() {
+			$scope.weatherForecast = WeatherAPI.get($routeParams.location).success(formatWeather);
+		}
 
-	    var init = function() {
-	        WeatherAPI.get($routeParams.location).success(function(data) {
+		function formatWeather(weatherData){
+			$scope.timezone = weatherData.timezone;
+        	$scope.hourly = cut(weatherData.hourly.data, 8);
+        	$scope.time = time(weatherData.hourly.data);
+        	$scope.dailySummary = weatherData.hourly.summary;
+        	$scope.date = dateFactory.formatDate(weatherData.currently.time);
+		}
 
-	        	var timeArr = [];
-	        	data.hourly.data.forEach(function(i){
-	        		timeArr.push(dateFactory.getHour(dateFactory.getDate(i.time)));
-	        	});
+		function time(data){
+	        return data.map(function(i){
+        		return dateFactory.getHour(dateFactory.getDate(i.time))
+        	}, []);
+		}
 
-	        	$scope.timezone = data.timezone;
-	        	$scope.hourly = data.hourly.data;
-	        	$scope.time = timeArr;
-	        	$scope.dailySummary = data.hourly.summary;
-	        	$scope.date = dateFactory.formatDate(data.currently.time);
+		function cut(arr, num){
+			return arr.slice(0, num);
+		}
 
-	         });
-	    };
+	    $scope.weather();
 
-	    init();
 	});
