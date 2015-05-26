@@ -1,6 +1,6 @@
 # Forecast App
 
-TODO: Implement unit tests, Google Maps API & remove JSONP.
+TODO: Write more tests!!
 
 ## To build:
 
