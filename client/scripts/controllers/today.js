@@ -8,10 +8,13 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory) {
+	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI) {
 
-		$scope.weather = function() {
-			$scope.weatherForecast = WeatherAPI.get($routeParams.location).success(formatWeather);
+		GeocodingAPI.get($routeParams.location).success(getLatLong);
+
+		function getLatLong(addressData){
+			var location = addressData.results[0].geometry.location;
+			$scope.weatherForecast = WeatherAPI.get(location.lat + ',' + location.lng).success(formatWeather);
 		}
 
 		function formatWeather(weatherData){
@@ -31,7 +34,5 @@ angular.module('forecastApp')
 		function cut(arr, num){
 			return arr.slice(0, num);
 		}
-
-	    $scope.weather();
 
 	});
