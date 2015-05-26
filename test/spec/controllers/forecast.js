@@ -33,7 +33,7 @@ describe('ForecastCtrl', function() {
         })
     );
 
-    it('should set days on successful search', function() {
+    it('should get days', function() {
     	expect(scope.days).toBeUndefined();
 
         scope.weather();
@@ -41,8 +41,15 @@ describe('ForecastCtrl', function() {
 
         expect(angular.isArray(scope.days)).toBeTruthy();
         expect(scope.days.length > 7).toBeTruthy(); 
-        expect(scope.timezone).toEqual('Australia/Sydney');
+    });
 
+    it('should set correct timezone', function() {
+        expect(scope.timezone).toBeUndefined();
+
+        scope.weather();
+        httpBackend.flush();
+
+        expect(scope.timezone).toEqual('Australia/Sydney');
     });
 
 });
