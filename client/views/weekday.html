@@ -3,11 +3,7 @@
 <h2>{{timezone}}</h2>
 <p><b>{{date}}</b>: {{weekdayData.summary}}</p>
 
-<table>
-	<colgroup>
-        <col span="1" style="background-color:#e8e8e8">
-    </colgroup>
-
+<table class="table table-striped table-bordered table-hover">
     <tr ng-repeat="(key, value) in weekdayData">
         <td>{{key}}</td>
         <td>{{value}}</td>
