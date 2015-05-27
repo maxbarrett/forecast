@@ -1,30 +1,51 @@
 'use strict';
 
 angular.module('forecastApp')
-	.factory('Utils', function(dateFactory, $routeParams) {
+	.factory('Utils', function(dateFactory) {
 	    return {
 
-	        slice: function(arr, num){
-	    		return arr.slice(0, num);
-	        },
+	        nameDays: function(data){
+	        	// data: daily weather object from forecast.io
 
-	        addDays: function(data){
 		        return data.map(function(i){
 	        		return dateFactory.getDayName(dateFactory.getDay(dateFactory.getDate(i.time)));
 	        	}, []);
+
+	        	// return: days of the week
 	        },
 
+
 	        time: function(data){
+	        	// data: hourly weather object from forecast.io
+
 		        return data.map(function(i){
 	        		return dateFactory.getHour(dateFactory.getDate(i.time))
 	        	}, []);
+
+	        	// return: array of numerical hours
 			},
 
-			getFirstDay: function(data){
-				// Find the correct day data
+
+			pickDay: function(data, urlDay){
+				// data: daily weather object from forecast.io
+				// urlDay: 'weekday'
+
 				return data.filter(function (day) {
-					return dateFactory.getDayName(dateFactory.getDay(dateFactory.getDate(day.time))).toLowerCase() === $routeParams.weekday.toLowerCase(); 
-				});
+					return dateFactory.getDayName(dateFactory.getDay(dateFactory.getDate(day.time))).toLowerCase() === urlDay; 
+				})[0];
+
+				// return: weather data object for weekday
+			},
+
+
+			getLatLong: function(addressData){
+				// data: response object from google maps api
+
+				if (addressData.data.results[0] === undefined) { return; }
+				var location = addressData.data.results[0].geometry.location; // a recursive object key search would be ideal here...
+				return location.lat + ',' + location.lng;
+
+				// return: lat long coordinates
 			}
 
 	    };

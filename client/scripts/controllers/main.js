@@ -9,5 +9,5 @@
  */
 angular.module('forecastApp')
     .controller('MainCtrl', function($scope) {
-    	$scope.test = 'Testing';
+    	$scope.made = 'Made in Sydney, Australia';
     });

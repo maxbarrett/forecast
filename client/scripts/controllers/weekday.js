@@ -11,17 +11,29 @@ angular.module('forecastApp')
 	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI, Utils) {
 
 		GeocodingAPI.get($routeParams.location).then( function(addressData){
-			var location = addressData.data.results[0].geometry.location;
-			return WeatherAPI.get(location.lat + ',' + location.lng);
-		}).then(setScopeVars).catch(function(err){
+
+			return Utils.getLatLong(addressData);
+
+		}).then( function(latLong){
+
+			return WeatherAPI.get(latLong);
+
+		}).then( function(data){
+
+			return setScopeVars(data.data);
+
+		}).catch( function(err){
+
 			$scope.timezone = 'I\'m so sorry, there\'s been a terrible mistake';
+
 		});
 
 		function setScopeVars(weatherData){
+			var weekdayData = Utils.pickDay(weatherData.daily.data, $routeParams.weekday.toLowerCase());
    			// add vars to scope for use in view
-        	$scope.timezone = weatherData.data.timezone;
-        	$scope.weekdayData = Utils.getFirstDay(weatherData.data.daily.data)[0]; // get first day
-        	$scope.date = dateFactory.formatDate(Utils.getFirstDay(weatherData.data.daily.data)[0].time);
+        	$scope.timezone = weatherData.timezone;
+        	$scope.weekdayData = weekdayData;
+        	$scope.date = dateFactory.formatDate(weekdayData.time);
 		}
 
 	});
