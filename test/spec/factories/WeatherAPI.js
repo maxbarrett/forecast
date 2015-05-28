@@ -1,44 +1,51 @@
-// describe('WeatherAPI', function() {
+describe('WeatherAPI', function() {
 
-//     var theFactory,
-//     	httpBackend,
-//     	WeatherAPICall;
+    var theFactory,
+        httpBackend,
+        url;
 
+    beforeEach(module('forecastApp'));
 
-//     beforeEach(module('forecastApp'));
+    beforeEach(inject(function(_WeatherAPI_, _$httpBackend_) {
+            theFactory = _WeatherAPI_;
+            httpBackend = _$httpBackend_;
+            url = 'https://api.forecast.io/forecast/892e00e8eed58f98e6293e199512daee/25.2048493,55.2707828?callback=JSON_CALLBACK';
+        })
+    );
 
-//     beforeEach(inject(function(WeatherAPI, $httpBackend) {
-//             theFactory = WeatherAPI;
-//             httpBackend = $httpBackend;
-//             WeatherAPICall = httpBackend.whenJSONP();
+    afterEach(function() {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+    });
 
-//             var mock = {
-// 			    currently: {},
-// 			    daily: {
-// 			    	data:[{}, {}, {}, {}, {}, {}, {}, {}]
-// 			    },
-// 			    flags: {},
-// 			    hourly: {},
-// 			    latitude: -33.8696,
-// 			    longitude: 151.207,
-// 			    offset: 10,
-// 			    timezone: "Australia/Sydney"
-// 			}
+    it('theFactory.get should be defined', function () {
+        expect(theFactory.get).toBeDefined();
+    });
 
-//             WeatherAPICall.respond(mock);
-//         })
-//     );
+    it('should show the correct lat/long coordinates', function() {
 
-//     // it('should return a truthy value from lat/long lookup', function() {
-//     //     expect(theFactory.get(-33.8674869,151.2069902)).toBeTruthy();
-//     // });
+        // set up some data for the http call to return and test
+        var returnData = { status: 200 };
+        
+        // expectJSONP to make sure it is called once
+        httpBackend.expectJSONP(url).respond(returnData);
+        
+        // make the call...
+        var returnedPromise = theFactory.get('25.2048493,55.2707828');
+        
+        // set up a handler for the response, putting the result
+        // into a variable in this scope to test
+        var result;
+        returnedPromise.then(function(response) {
+            result = response;
+        });
+        
+        // flush the backend to make the request to do the expectedJSONP assertion
+        httpBackend.flush();
+        
+        // check the result:
+        expect(result).toEqual(returnData);
 
-//     it('should do something', function() {
+    });
 
-//         httpBackend.flush();
-
-//         expect(angular.isArray(scope.days)).toBeTruthy();
-//         expect(scope.days.length > 7).toBeTruthy(); 
-//     });
-
-// });
+});

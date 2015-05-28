@@ -26,7 +26,6 @@ describe('Utils', function() {
             }];
 
             mapsData = {
-                "data": {
                     "results": [{
                         "geometry": {
                             "location": {
@@ -36,7 +35,6 @@ describe('Utils', function() {
                         }
                     }]
                 }
-            }
 
         })
     );

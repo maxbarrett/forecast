@@ -2,43 +2,50 @@ describe('GeocodingAPI', function() {
 
     var theFactory,
         httpBackend,
-        GeocodingAPICall;
+        url;
 
     beforeEach(module('forecastApp'));
 
-    beforeEach(inject(function(GeocodingAPI, $httpBackend) {
-
-            // var mock = {
-            //      currently: {},
-            //      daily: {
-            //          data:[{}, {}, {}, {}, {}, {}, {}, {}]
-            //      },
-            //      flags: {},
-            //      hourly: {},
-            //      latitude: -33.8696,
-            //      longitude: 151.207,
-            //      offset: 10,
-            //      timezone: "Australia/Sydney"
-            //  }
-
-            theFactory = GeocodingAPI;
-            httpBackend = $httpBackend;
-            //httpBackend.whenJSONP().respond(mock);
+    beforeEach(inject(function(_GeocodingAPI_, _$httpBackend_) {
+            theFactory = _GeocodingAPI_;
+            httpBackend = _$httpBackend_;
+            url = 'http://maps.google.com/maps/api/geocode/json?address=sydney&sensor=false';
         })
     );
 
-    // http://stackoverflow.com/questions/19096300/testing-jsonp-resource-angularjs
+    afterEach(function() {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it("theFactory.get should be defined", function () {
+        expect(theFactory.get).toBeDefined();
+    });
 
     it('should show the correct lat/long coordinates', function() {
-        var returnData = { testing: 'anything'};
 
-        httpBackend.expectJSONP('http://maps.google.com/maps/api/geocode/json?address=sydney&sensor=false').respond(returnData);
-
-        theFactory.get({location:'sydney'}, function(){
-            expect(location.testing).toEqual('anything');
-        })
-
+        // set up some data for the http call to return and test
+        var returnData = { status: 200 };
+        
+        // expectGET to make sure it is called once
+        httpBackend.expectGET(url).respond(returnData);
+        
+        // make the call...
+        var returnedPromise = theFactory.get('sydney');
+        
+        // set up a handler for the response, putting the result
+        // into a variable in this scope to test
+        var result;
+        returnedPromise.then(function(response) {
+            result = response;
+        });
+        
+        // flush the backend to make the request to do the expectedGET assertion.
         httpBackend.flush();
+        
+        // check the result:
+        expect(result).toEqual(returnData);
+
     });
 
 });
