@@ -4,13 +4,13 @@
   "main": "server/server.js",
   "repository": {},
   "dependencies": {
+    "bower": "^1.4.1",
     "express": "~4.0.0",
     "serve-favicon": "~2.0.1",
     "errorhandler": "~1.0.0",
     "ejs": "~0.8.4"
   },
   "devDependencies": {
-    "bower": "^1.4.1",
     "jasmine-core": "^2.3.3",
     "karma": "^0.12.31",
     "karma-jasmine": "^0.3.5",
