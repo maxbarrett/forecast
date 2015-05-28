@@ -9,5 +9,7 @@
  */
 angular.module('forecastApp')
     .controller('MainCtrl', function($scope) {
+
     	$scope.made = 'Made in Sydney, Australia';
+    	
     });

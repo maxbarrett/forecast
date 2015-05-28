@@ -14,15 +14,15 @@ angular.module('forecastApp')
 
 			return Utils.getLatLong(addressData);
 
-		}).then(function(latLong){
+		}).then( function(latLong){
 
 			return WeatherAPI.get(latLong);
 
-		}).then(function(data){
+		}).then( function(data){
 
-			return setScopeVars(data.data);
+			return setScopeVars(data);
 
-		}).catch(function(err){
+		}).catch( function(err){
 
 			$scope.timezone = 'I\'m so sorry, there\'s been a terrible mistake';
 
