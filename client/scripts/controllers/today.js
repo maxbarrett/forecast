@@ -8,7 +8,7 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI, Utils) {
+	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, DateFactory, GeocodingAPI, Utils) {
 
 		$scope.resourceLoaded = false;
 
@@ -32,11 +32,12 @@ angular.module('forecastApp')
 
 		function setScopeVars(weatherData){
 			$scope.resourceLoaded = true;
-			$scope.timezone = weatherData.timezone;
-        	$scope.hourly = weatherData.hourly.data.slice(0, 8);
-        	$scope.time = Utils.time(weatherData.hourly.data);
-        	$scope.dailySummary = weatherData.hourly.summary;
-        	$scope.date = dateFactory.formatDate(weatherData.currently.time);
+			
+			$scope.timezone = weatherData.timezone; // location string
+        	$scope.hourly = weatherData.hourly.data.slice(0, 8); // data for next 8 hours
+        	$scope.time = Utils.time(weatherData.hourly.data); // show hours from unix timestamp
+        	$scope.dailySummary = weatherData.hourly.summary; // forecast summary as a string
+        	$scope.date = DateFactory.formatDate(weatherData.currently.time); // today's formatted date
 		}
 
 	});

@@ -8,7 +8,9 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI, Utils) {
+	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, DateFactory, GeocodingAPI, Utils) {
+
+		$scope.resourceLoaded = false;
 
 		GeocodingAPI.get($routeParams.location).then( function(addressData){
 
@@ -29,11 +31,14 @@ angular.module('forecastApp')
 		});
 
 		function setScopeVars(weatherData){
+			$scope.resourceLoaded = true;
+
+			// cache result as it's used twice 
 			var weekdayData = Utils.pickDay(weatherData.daily.data, $routeParams.weekday.toLowerCase());
-   			// add vars to scope for use in view
-        	$scope.timezone = weatherData.timezone;
-        	$scope.weekdayData = weekdayData;
-        	$scope.date = dateFactory.formatDate(weekdayData.time);
+
+        	$scope.timezone = weatherData.timezone; //  location
+        	$scope.weekdayData = weekdayData; // the data
+        	$scope.date = DateFactory.formatDate(weekdayData.time); //  formatted date
 		}
 
 	});

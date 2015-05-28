@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('forecastApp')
-	.factory('Utils', function(dateFactory) {
+	.factory('Utils', function(DateFactory) {
 	    return {
 
 	        nameDays: function(data){
 	        	// data: daily weather object from forecast.io
 
 		        return data.map(function(i){
-	        		return dateFactory.getDayName(dateFactory.getDay(dateFactory.getDate(i.time)));
+	        		return DateFactory.getDayName(DateFactory.getDay(DateFactory.getDate(i.time)));
 	        	}, []);
 
 	        	// return: days of the week
@@ -19,7 +19,7 @@ angular.module('forecastApp')
 	        	// data: hourly weather object from forecast.io
 
 		        return data.map(function(i){
-	        		return dateFactory.getHour(dateFactory.getDate(i.time))
+	        		return DateFactory.getHour(DateFactory.getDate(i.time))
 	        	}, []);
 
 	        	// return: array of numerical hours
@@ -31,7 +31,7 @@ angular.module('forecastApp')
 				// urlDay: 'weekday'
 
 				return data.filter(function (day) {
-					return dateFactory.getDayName(dateFactory.getDay(dateFactory.getDate(day.time))).toLowerCase() === urlDay; 
+					return DateFactory.getDayName(DateFactory.getDay(DateFactory.getDate(day.time))).toLowerCase() === urlDay; 
 				})[0];
 
 				// return: weather data object for weekday

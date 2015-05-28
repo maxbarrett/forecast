@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('forecastApp')
-	.factory('dateFactory', function() {
+	.factory('DateFactory', function() {
 	    return {
 	        formatDate: function(unixTimestamp){
 	        	// unixTimestamp: 1432729607
