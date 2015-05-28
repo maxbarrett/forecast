@@ -70,8 +70,7 @@ angular.module('forecastApp')
 			    return monthNames[monthIndex];
 
 			    // return: 'June'
-	        },
-
-	        
+	        }
 	    };
 	});
+
