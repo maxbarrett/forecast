@@ -1,14 +1,14 @@
-# Forecast App
+## Forecast
 
-## To build:
+#### To build:
 
 Run `npm install` & `bower install` for dependencies.
 
-## To serve:
+#### To serve:
 
 Run `npm start` & point browser to `http://localhost:8000/`
 
-## To test:
+#### To test:
 
 Install karma globally:
 `npm install -g karma-cli`
