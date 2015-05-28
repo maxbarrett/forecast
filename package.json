@@ -21,10 +21,10 @@
   "scripts": {
     "start": "node server/server.js",
     "test": "karma start test/karma.conf.js",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "bower install"
   },
   "private": true,
-  "description": "NewsCorp test",
+  "description": "Recruitment test",
   "author": "Max Barrett <maxjbarrett@gmail.com>",
   "license": "ISC"
 }
