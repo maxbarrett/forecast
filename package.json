@@ -20,7 +20,8 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "karma start test/karma.conf.js"
+    "test": "karma start test/karma.conf.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "private": true,
   "description": "NewsCorp test",
