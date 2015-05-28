@@ -41,8 +41,8 @@ angular.module('forecastApp')
 			getLatLong: function(addressData){
 				// data: response object from google maps api
 
-				if (addressData.data.results[0] === undefined) { return; }
-				var location = addressData.data.results[0].geometry.location; // a recursive object key search would be ideal here...
+				if (addressData.results[0] === undefined) { return; }
+				var location = addressData.results[0].geometry.location; // a recursive object key search would be ideal here...
 				return location.lat + ',' + location.lng;
 
 				// return: lat long coordinates

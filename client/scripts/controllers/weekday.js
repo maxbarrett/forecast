@@ -20,7 +20,7 @@ angular.module('forecastApp')
 
 		}).then( function(data){
 
-			return setScopeVars(data.data);
+			return setScopeVars(data);
 
 		}).catch( function(err){
 
