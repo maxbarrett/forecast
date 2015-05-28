@@ -1,28 +1,34 @@
-<div class="row marketing">
+<ng-include src="'views/components/errorMessage.html'"></ng-include>
 
-<h2>{{timezone}}</h2>
+<div class="row marketing" data-ng-show="resourceLoaded">
 
-<table width="100%" id="hourly" class="table table-striped table-bordered table-hover">
-	<thead>
-	<tr>
-		<td></td>
-		<td ng-repeat="item in days">{{item}}</td>
-	</tr>
-	</thead>
-	<tr>
-		<td>Summary:</td>
-		<td ng-repeat="item in daily">{{item.summary}}</td>
-	</tr>
-	<tr>
-		<td>Max temp:</td>
-		<td ng-repeat="item in daily">{{item.temperatureMax}}°F</td>
-	</tr>
-	<tr>
-		<td>Chance of rain:</td>
-		<td ng-repeat="item in daily">{{item.precipProbability * 100}}%</td>
-	</tr>
-	<tr>
-		<td>Wind speed:</td>
-		<td ng-repeat="item in daily">{{item.windSpeed}}</td>
-	</tr>
-</table>
+	<h2>{{timezone}}</h2>
+
+	<table width="100%" id="hourly" class="table table-striped table-bordered table-hover">
+		<thead>
+		<tr>
+			<td></td>
+			<td ng-repeat="item in days">{{item}}</td>
+		</tr>
+		</thead>
+		<tr>
+			<td>Summary:</td>
+			<td ng-repeat="item in daily">{{item.summary}}</td>
+		</tr>
+		<tr>
+			<td>Max temp:</td>
+			<td ng-repeat="item in daily">{{item.temperatureMax}}°F</td>
+		</tr>
+		<tr>
+			<td>Chance of rain:</td>
+			<td ng-repeat="item in daily">{{item.precipProbability * 100}}%</td>
+		</tr>
+		<tr>
+			<td>Wind speed:</td>
+			<td ng-repeat="item in daily">{{item.windSpeed}}</td>
+		</tr>
+	</table>
+
+</div>
+
+<ng-include src="'views/components/spinner.html'"></ng-include>

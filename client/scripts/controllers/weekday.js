@@ -24,7 +24,7 @@ angular.module('forecastApp')
 
 		}).catch( function(err){
 
-			$scope.timezone = 'I\'m so sorry, there\'s been a terrible mistake';
+			$scope.oops = 'I\'m so sorry, there\'s been a terrible mistake';
 
 		});
 

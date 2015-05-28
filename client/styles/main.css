@@ -5,6 +5,15 @@ h1 { margin-top:0; }
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header, .marketing, .footer { padding-left: 15px; padding-right: 15px; }
 
+.view { min-height:500px; }
+
+.spinner { width: 29px; height: 29px; margin:0 auto; background: url('../images/loader-bg.png') no-repeat -54px 0px; animation: embed-spinner .7s infinite linear; }
+
+@keyframes embed-spinner {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 /* Custom page header */
 .header { border-bottom: 1px solid #e5e5e5; margin-bottom: 10px; }
 

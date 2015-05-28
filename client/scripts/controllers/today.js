@@ -10,6 +10,8 @@
 angular.module('forecastApp')
 	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, dateFactory, GeocodingAPI, Utils) {
 
+		$scope.resourceLoaded = false;
+
 		GeocodingAPI.get($routeParams.location).then( function(addressData){
 
 			return Utils.getLatLong(addressData);
@@ -24,11 +26,12 @@ angular.module('forecastApp')
 
 		}).catch( function(err){
 
-			$scope.timezone = 'I\'m so sorry, there\'s been a terrible mistake';
+			$scope.oops = 'I\'m so sorry, there\'s been a terrible mistake';
 
 		});
 
 		function setScopeVars(weatherData){
+			$scope.resourceLoaded = true;
 			$scope.timezone = weatherData.timezone;
         	$scope.hourly = weatherData.hourly.data.slice(0, 8);
         	$scope.time = Utils.time(weatherData.hourly.data);
