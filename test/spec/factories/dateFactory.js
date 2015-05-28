@@ -1,11 +1,11 @@
-describe('dateFactory', function() {
+describe('DateFactory', function() {
 
     var theFactory; 
 
     beforeEach(module('forecastApp'));
 
-    beforeEach(inject(function(dateFactory) {
-            theFactory = dateFactory;
+    beforeEach(inject(function(DateFactory) {
+            theFactory = DateFactory;
         })
     );
 
@@ -17,11 +17,11 @@ describe('dateFactory', function() {
         expect(theFactory.getHour(new Date('Wed May 27 2015 22:00:00 GMT+1000 (AEST)'))).toEqual('22');
     });
 
-    it('should extract the day from a date object', function() {
+    it('should extract the day index from a date object', function() {
         expect(theFactory.getDay(new Date('Wed May 27 2015 22:00:00 GMT+1000 (AEST)'))).toEqual(3);
     });
 
-    it('should show day name from index', function() {
+    it('should get the day name from an index', function() {
         expect(theFactory.getDayName(3)).toEqual('Wednesday');
     });
 
@@ -29,7 +29,7 @@ describe('dateFactory', function() {
         expect(theFactory.getDate(1432670400)).toEqual(new Date('Wed May 27 2015 06:00:00 GMT+1000 (AEST)'));
     });
 
-    it('should show the correct date from a unix timestamp', function() {
+    it('should show the correct month from an index', function() {
         expect(theFactory.getMonth(5)).toEqual('June');
     });
 

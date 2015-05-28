@@ -18,11 +18,11 @@ describe('WeatherAPI', function() {
         httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('theFactory.get should be defined', function () {
+    it('WeatherAPI.get should be defined', function () {
         expect(theFactory.get).toBeDefined();
     });
 
-    it('should show the correct lat/long coordinates', function() {
+    it('should send the request and return a response', function() {
 
         // set up some data for the http call to return and test
         var returnData = { status: 200 };
