@@ -2,32 +2,31 @@
 
 <div class="row marketing" data-ng-show="resourceLoaded">
 
-	<h2>{{timezone}}</h2>
-	<p><b>Today's forecast:</b> {{dailySummary}}</p>
-	<p>{{date}}</p>
+	<h2>{{weather.locale}}</h2>
+	<p><b>{{weather.date}}</b> {{weather.dailySummary}}</p>
 
 	<table width="100%" id="hourly" class="table table-striped table-bordered table-hover">
 		<thead>
 		<tr>
 			<td></td>
-			<td ng-repeat="item in time | limitTo: 8">{{item}}:00</td>
+			<td ng-repeat="item in weather.time | limitTo: 8">{{item}}:00</td>
 		</tr>
 		</thead>
 		<tr>
 			<td>Summary:</td>
-			<td ng-repeat="item in hourly">{{item.summary}}</td>
+			<td ng-repeat="item in weather.data">{{item.summary}}</td>
 		</tr>
 		<tr>
-			<td>Temp:</td>
-			<td ng-repeat="item in hourly">{{item.temperature}}</td>
+			<td>Temperature:</td>
+			<td ng-repeat="item in weather.data">{{item.temperature}}°C</td>
 		</tr>
 		<tr>
 			<td>Chance of rain:</td>
-			<td ng-repeat="item in hourly">{{item.precipProbability * 100}}%</td>
+			<td ng-repeat="item in weather.data">{{item.precipProbability}}%</td>
 		</tr>
 		<tr>
 			<td>Wind speed:</td>
-			<td ng-repeat="item in hourly">{{item.windSpeed}}</td>
+			<td ng-repeat="item in weather.data">{{item.windSpeed}} mph</td>
 		</tr>
 	</table>
 
