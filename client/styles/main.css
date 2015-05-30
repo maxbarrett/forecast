@@ -10,7 +10,7 @@ thead td { font-weight: bold; text-align: center; }
 
 .view { min-height:500px; }
 
-.spinner { width: 29px; height: 29px; margin:0 auto; background: url('../images/loader-bg.png') no-repeat -54px 0px; animation: embed-spinner .7s infinite linear; }
+.spinner { width: 29px; height: 29px; margin:100px auto; background: url('../images/loader-bg.png') no-repeat -54px 0px; animation: embed-spinner .7s infinite linear; }
 
 @keyframes embed-spinner {
 	0% { transform: rotate(0deg); }
