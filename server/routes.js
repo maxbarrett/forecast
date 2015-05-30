@@ -4,8 +4,6 @@ var errors = require('./errors');
 
 module.exports = function(app) {
 
-	// TODO: FIX ERROR ROUTING...
-
     // All undefined asset or api routes should return a 404
     app.route('/:url(api|auth|components|app|bower_components|assets)/*')
         .get(errors[404]);
