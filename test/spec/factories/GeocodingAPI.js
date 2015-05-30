@@ -9,7 +9,7 @@ describe('GeocodingAPI', function() {
     beforeEach(inject(function(_GeocodingAPI_, _$httpBackend_) {
             theFactory = _GeocodingAPI_;
             httpBackend = _$httpBackend_;
-            url = 'http://maps.google.com/maps/api/geocode/json?address=sydney&sensor=false';
+            url = 'https://maps.google.com/maps/api/geocode/json?address=sydney&sensor=false';
         })
     );
 
