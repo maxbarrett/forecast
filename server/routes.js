@@ -13,6 +13,6 @@ module.exports = function(app) {
     // All other routes should redirect to the index.html
     app.route('/*')
         .get(function(req, res) {
-        	res.sendFile('index.html', { root: __dirname + '/../client/' });
+        	res.render('index.html', { root: __dirname + '/../client/' });
         });
 };

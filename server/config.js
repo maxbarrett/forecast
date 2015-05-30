@@ -10,7 +10,7 @@ module.exports = function(app) {
 	var env = app.get('env');
 
 	// Set html as the templating engine
-	app.set('views', '/server/views');
+	app.set('views', __dirname + '/../client');
 	app.engine('html', require('ejs').renderFile);
 	app.set('view engine', 'html');
 
