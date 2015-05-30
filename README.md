@@ -1,25 +1,29 @@
 ## Forecast
 
+#### To build 
+Install all dependencies from npm and Bower:
+```
+npm build
+```
 
 
-#### To build:
+#### To serve
+Create a node server & point browser to `http://localhost:8000/`
+```
+npm start
+```
 
-Run `npm install` & `bower install` for dependencies.
 
-#### To serve:
-
-Run `npm start` & point browser to `http://localhost:8000/`
-
-#### To test:
-
-Install karma globally:
-`npm install -g karma-cli`
-
-Run `npm test`
+#### To test 
+After installing dependencies, run the Jasmine unit tests through Karma:
+```
+npm test
+```
 
 
 ---
 
+#### Requirements:
 
 **Scenario One:** A weather forecast should be displayed based upon the location specified in the url:   
 Expected URL: http://localhost:/weather/:location   

@@ -20,6 +20,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "build": "npm install && bower install",
     "start": "node server/server.js",
     "test": "karma start test/karma.conf.js",
     "postinstall": "bower install"
