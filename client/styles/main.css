@@ -27,8 +27,11 @@ thead td { font-weight: bold; text-align: center; }
 /* Main marketing message */
 .jumbotron { text-align: center; border-bottom: 1px solid #e5e5e5; background-image:url('../images/clouds.jpg'); background-position: 50% 50%; padding:150px 0;  }
 .jumbotron h1,
-.jumbotron p { color:#fff; }
+.jumbotron p, 
+.jumbotron li a { color:#fff; }
 
+.jumbotron ul { padding:0; margin:0; }
+.jumbotron li { list-style: none; }
 
 /* Supporting marketing content */
 .marketing { margin: 0 0 40px; }
