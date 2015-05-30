@@ -8,7 +8,7 @@
  * Controller of the forecastApp
  */
 angular.module('forecastApp')
-	.controller('ForecastCtrl', function($scope, $routeParams, WeatherAPI, GeocodingAPI, Utils) {
+	.controller('ForecastCtrl', function($scope, $routeParams, $location, WeatherAPI, GeocodingAPI, Utils) {
 
 		// show the loading spinner
 		$scope.resourceLoaded = false;
@@ -36,11 +36,13 @@ angular.module('forecastApp')
 
 		});
 
+
 		function setScopeVars(weatherData){
 			// hide the loading spinner
 			$scope.resourceLoaded = true;
 
 			// set template vars
+			$scope.location = $location.path();
         	$scope.timezone = weatherData.timezone; // show location string
         	$scope.days = Utils.nameDays(weatherData.daily.data.slice(0, 5)); // display formatted day names 
         	$scope.daily = weatherData.daily.data.slice(0, 5); // show data for next 5 days

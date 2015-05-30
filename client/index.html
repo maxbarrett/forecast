@@ -27,13 +27,8 @@
 					<a class="navbar-brand" href="/">Forecast</a>
 				</div>
 
-				<div class="collapse navbar-collapse" id="js-navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li><a ng-href="/weather/sydney/">Week Ahead</a></li>
-						<li><a ng-href="/weather/dubai/monday">Monday</a></li>
-						<li><a ng-href="/weather/london/today">Today</a></li>
-					</ul>
-				</div>
+				<ng-include src="'views/components/navigation.html'"></ng-include>
+
 			</div>
 		</div>
 	</div>
