@@ -10,10 +10,13 @@
 angular.module('forecastApp')
 	.controller('TodayCtrl', function($scope, $routeParams, WeatherAPI, DateFactory, GeocodingAPI, Utils) {
 
+		$scope.weather = {};
 		$scope.resourceLoaded = false;
+		$scope.spinner = true;
 
 		GeocodingAPI.get($routeParams.location).then( function(addressData){
-
+			
+			$scope.weather.locale = Utils.getLocale(addressData);
 			return Utils.getLatLong(addressData);
 
 		}).then( function(latLong){
@@ -27,17 +30,22 @@ angular.module('forecastApp')
 		}).catch( function(err){
 
 			$scope.oops = 'I\'m so sorry, there\'s been a terrible mistake';
+			$scope.spinner = false;
 
 		});
 
 		function setScopeVars(weatherData){
 			$scope.resourceLoaded = true;
-			
-			$scope.timezone = weatherData.timezone; // location string
-        	$scope.hourly = weatherData.hourly.data.slice(0, 8); // data for next 8 hours
-        	$scope.time = Utils.time(weatherData.hourly.data); // show hours from unix timestamp
-        	$scope.dailySummary = weatherData.hourly.summary; // forecast summary as a string
-        	$scope.date = DateFactory.formatDate(weatherData.currently.time); // today's formatted date
+			$scope.spinner = false;
+
+			// data for next 8 hours
+        	$scope.weather.data = Utils.chooseWeatherStats(weatherData.hourly.data.slice(0, 8));
+        	// show hours from unix timestamp
+        	$scope.weather.time = Utils.time(weatherData.hourly.data);
+        	// forecast summary as a string
+        	$scope.weather.dailySummary = weatherData.hourly.summary; 
+        	// today's formatted date
+        	$scope.weather.date = DateFactory.formatDate(weatherData.currently.time) + ':'; 
 		}
 
 	});

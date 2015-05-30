@@ -46,7 +46,91 @@ angular.module('forecastApp')
 				return location.lat + ',' + location.lng;
 
 				// return: lat long coordinates
+			},
+
+
+			getLocale: function(data){
+				// data: response object from google maps api
+
+				if (data.results[0]) {
+					return data.results[0].address_components[0].long_name;
+				} else {
+					return 'Unknown';
+				}
+
+				// return: Location string
+			},
+
+
+			// depending on whether data is for one time or several
+			chooseWeatherStats: function(weatherData){
+				if (this.isArray(weatherData)){
+					return this.getRepeatStats(weatherData);
+				} else {
+					return this.getStats(weatherData);
+				}
+			},
+
+
+			// check
+			isArray: function(arr){
+				return Object.prototype.toString.call(arr) === '[object Array]';
+			},
+
+
+			// only grab necessary data for the view template
+			getStats: function(weatherData){
+				var self = this;
+				var stats = {};
+
+				stats.summary = weatherData.summary;
+				stats.temperatureMax = self.convertFarenheitCelcius(weatherData.temperatureMax);
+				stats.temperatureMin = self.convertFarenheitCelcius(weatherData.temperatureMin);
+				stats.precipProbability = self.convertDecimalPercentage(weatherData.precipProbability);
+				stats.windSpeed = Math.round(weatherData.windSpeed);
+
+				return stats;
+			},
+
+
+			// as above but for repeated data
+			getRepeatStats: function(weatherData){
+				var self = this;
+				var stats = [];
+
+				weatherData.map(function(current, index, arr){
+					var foo = {}
+
+					foo.summary = current.summary;
+					foo.precipProbability = self.convertDecimalPercentage(current.precipProbability);
+					foo.windSpeed = Math.round(current.windSpeed);
+
+					// hourly data doesn't have min/max temps
+					if (current.temperature){
+						foo.temperature = self.convertFarenheitCelcius(current.temperature);
+					} else {
+						foo.temperatureMax = self.convertFarenheitCelcius(current.temperatureMax);
+						foo.temperatureMin = self.convertFarenheitCelcius(current.temperatureMin);
+					}
+
+					stats.push(foo);
+				});
+
+				return stats;
+			},
+
+
+			// nobody uses farenheit these days
+			convertFarenheitCelcius: function(farenheit){
+				return Math.round((farenheit - 32) * (5/9));
+			},
+
+
+			// percentages are nicer than decimals
+			convertDecimalPercentage: function(decimal){
+				return Math.round(decimal * 100);
 			}
+
 
 	    };
 	});

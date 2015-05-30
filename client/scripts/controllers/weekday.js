@@ -10,10 +10,14 @@
 angular.module('forecastApp')
 	.controller('WeekdayCtrl', function($scope, $routeParams, WeatherAPI, DateFactory, GeocodingAPI, Utils) {
 
+		$scope.weather = {};
 		$scope.resourceLoaded = false;
+		$scope.spinner = true;
+
 
 		GeocodingAPI.get($routeParams.location).then( function(addressData){
 
+			$scope.weather.locale = Utils.getLocale(addressData);
 			return Utils.getLatLong(addressData);
 
 		}).then( function(latLong){
@@ -27,18 +31,19 @@ angular.module('forecastApp')
 		}).catch( function(err){
 
 			$scope.oops = 'I\'m so sorry, there\'s been a terrible mistake';
+			$scope.spinner = false;
 
 		});
 
 		function setScopeVars(weatherData){
-			$scope.resourceLoaded = true;
-
 			// cache result as it's used twice 
 			var weekdayData = Utils.pickDay(weatherData.daily.data, $routeParams.weekday.toLowerCase());
 
-        	$scope.timezone = weatherData.timezone; //  location
-        	$scope.weekdayData = weekdayData; // the data
-        	$scope.date = DateFactory.formatDate(weekdayData.time); //  formatted date
+			$scope.resourceLoaded = true;
+			$scope.spinner = false;
+
+        	$scope.weather.data = Utils.chooseWeatherStats(weekdayData); // the data
+        	$scope.weather.date = DateFactory.formatDate(weekdayData.time); //  formatted date
 		}
 
 	});
