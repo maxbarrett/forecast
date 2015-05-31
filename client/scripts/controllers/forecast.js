@@ -39,6 +39,7 @@ angular.module('forecastApp')
 			// if there's any errors in the above sequence, let the user know
 			$scope.oops = 'I\'m so sorry, there\'s been a terrible mistake';
 			$scope.spinner = false;
+			$scope.resourceLoaded = false;
 		});
 
 		// set template vars

@@ -32,6 +32,7 @@ angular.module('forecastApp')
 
 			$scope.oops = 'I\'m so sorry, there\'s been a terrible mistake';
 			$scope.spinner = false;
+			$scope.resourceLoaded = false;
 
 		});
 

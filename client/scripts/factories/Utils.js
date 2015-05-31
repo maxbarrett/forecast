@@ -99,21 +99,21 @@ angular.module('forecastApp')
 				var stats = [];
 
 				weatherData.map(function(current, index, arr){
-					var foo = {}
+					var dayObj = {}
 
-					foo.summary = current.summary;
-					foo.precipProbability = self.convertDecimalPercentage(current.precipProbability);
-					foo.windSpeed = Math.round(current.windSpeed);
+					dayObj.summary = current.summary;
+					dayObj.precipProbability = self.convertDecimalPercentage(current.precipProbability);
+					dayObj.windSpeed = Math.round(current.windSpeed);
 
 					// hourly data doesn't have min/max temps
 					if (current.temperature){
-						foo.temperature = self.convertFarenheitCelcius(current.temperature);
+						dayObj.temperature = self.convertFarenheitCelcius(current.temperature);
 					} else {
-						foo.temperatureMax = self.convertFarenheitCelcius(current.temperatureMax);
-						foo.temperatureMin = self.convertFarenheitCelcius(current.temperatureMin);
+						dayObj.temperatureMax = self.convertFarenheitCelcius(current.temperatureMax);
+						dayObj.temperatureMin = self.convertFarenheitCelcius(current.temperatureMin);
 					}
 
-					stats.push(foo);
+					stats.push(dayObj);
 				});
 
 				return stats;
