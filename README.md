@@ -3,7 +3,7 @@
 #### To build 
 Install all dependencies from npm and Bower:
 ```
-npm build
+npm run-script build
 ```
 
 
